@@ -3,10 +3,10 @@
 
 namespace _2D_Game
 {
-    class Vector2
+    public class Vector2
     {
-        public float x { get; private set; }
-        public float y { get; private set; }
+        public float x { get;  set; }
+        public float y { get;  set; }
 
         public Vector2()
         {
