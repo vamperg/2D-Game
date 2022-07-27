@@ -9,8 +9,75 @@ using System.Text;
 using System.Drawing;
 namespace _2D_Game
 {
-    class Program
+
+    public class Program
     {
+        private static Graphics graphics = new Graphics(331, 76, 2f);
+        
+        public static void Control()
+        {
+            float speed = 0.1f;
+            while (true)
+            {
+                var key = Console.ReadKey(true).Key;
+
+                switch (key)
+                {
+                    case ConsoleKey.A:
+                        /*graphics.playerAngle = 3.95f;
+                        graphics.playerPos.x = graphics.playerPos.x - speed;*/
+                        graphics.camera.Move(new Vector3(0, -speed, 0));
+
+
+                        break;
+                    case ConsoleKey.W:
+                        /*graphics.playerAngle = 2.2f;
+                        graphics.playerPos.y = graphics.playerPos.y - speed;*/
+                        graphics.camera.Move(new Vector3(speed, 0, 0));
+                        break;
+                    case ConsoleKey.D:
+                        /* graphics.playerAngle = 0.75f;
+                         graphics.playerPos.x = graphics.playerPos.x + speed;*/
+                        graphics.camera.Move(new Vector3(0, speed, 0));
+                        break;
+                    case ConsoleKey.S:
+                        /*graphics.playerAngle = 5.6f;
+                        graphics.playerPos.y = graphics.playerPos.y + speed;*/
+                        graphics.camera.Move(new Vector3(-speed, 0 , 0));
+                        break;
+                    case ConsoleKey.Spacebar:
+                        /*graphics.playerAngle = 5.6f;
+                        graphics.playerPos.y = graphics.playerPos.y + speed;*/
+                        graphics.camera.Move(new Vector3(0, 0, -speed));
+                        break;
+                    case ConsoleKey.C:
+                        /*graphics.playerAngle = 5.6f;
+                        graphics.playerPos.y = graphics.playerPos.y + speed;*/
+                        graphics.camera.Move(new Vector3(0, 0, speed));
+                        break;
+                    case ConsoleKey.NumPad8:
+                        /*graphics.playerAngle = 5.6f;
+                        graphics.playerPos.y = graphics.playerPos.y + speed;*/
+                        graphics.camera.rotation.y -= speed/2;
+                        break;
+                    case ConsoleKey.NumPad2:
+                        /*graphics.playerAngle = 5.6f;
+                        graphics.playerPos.y = graphics.playerPos.y + speed;*/
+                        graphics.camera.rotation.y += speed / 2;
+                        break;
+                    case ConsoleKey.NumPad4:
+                        /*graphics.playerAngle = 5.6f;
+                        graphics.playerPos.y = graphics.playerPos.y + speed;*/
+                        graphics.camera.rotation.z -= speed / 2;
+                        break;
+                    case ConsoleKey.NumPad6:
+                        /*graphics.playerAngle = 5.6f;
+                        graphics.playerPos.y = graphics.playerPos.y + speed;*/
+                        graphics.camera.rotation.z += speed / 2;
+                        break;
+                }
+            }
+        }
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct ConsoleFont
         {
@@ -68,21 +135,6 @@ namespace _2D_Game
             }
 
         }
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static extern int SetConsoleFont( // Функция не документирована
-            IntPtr hOut,    // handle полученный от GetStdHandle
-            uint dwFontNum  // Значение должно быть от 0 до 9
-            );
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static extern IntPtr GetStdHandle(int dwType);
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static extern IntPtr GetConsoleWindow();
-
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern uint PostMessage(IntPtr hWnd, int uMsg, int wParam, IntPtr lParam);
-
-        const int STD_OUT_HANDLE = -11;
 
         static void Main(string[] args)
         {
@@ -93,12 +145,15 @@ namespace _2D_Game
 
             float speed = 0.02f;
             Console.Beep(500, 200);
-            Graphics graphics = new Graphics(331, 76, 2f);
+           
             float width = graphics.height / 10;
             float height = graphics.width / 100;
 
            
-            Console.Title = "3Д РЕНДЕР ТИРЕХЕДИШИН00.1";
+            Console.Title = "3Д УЛЬТРАМЕГАЭНДЖИН v0.1";
+
+
+            /*Hello();*/
 
             Circle circle = new Circle(new Vector2(-1, 0), 0.3f);
             SolidRectangle rect = new SolidRectangle(new Vector2(1, -1f), new Vector2(1,2), new char[] { '=' });
@@ -112,14 +167,7 @@ namespace _2D_Game
 
             Thread Sound = new Thread(Sounds);
             Sound.Start();
-            Console.WriteLine("Чтобы все работало правильно, необходимо провести настройку консоли.\nНажмите правой кнопкой мыши по загаловку консоли, далее свойства. ");
-            Console.WriteLine("В настройках расположение изменить размер окна. Ширина 331  высота 81!");
-            Console.WriteLine("В настройках терминала Цвет курсора, использовать цвет и все значения в 0");
-            Console.WriteLine("Обязательно поставьте 10 РАЗМЕР шрифта в консоли!! ");
-            
-            SetConsoleFont(GetStdHandle(STD_OUT_HANDLE), 10);
-            Console.WriteLine("!!!\nНажмите любые кнопки, чтобы начать\n WASD Space C - Управление");
-            Console.ReadKey();
+             
             for (int t = 0; t < 10000; t++)
             {
                
@@ -135,12 +183,10 @@ namespace _2D_Game
 
                 //graphics.Draw(rect);
                 graphics.End();
+                
                 Console.SetCursorPosition(0, 3);
                 Console.Write("Dev. Vamperg - v0.01");
                 Console.SetCursorPosition(0, 0);
-
-
-
 
 
             }
@@ -151,48 +197,17 @@ namespace _2D_Game
             {
                 Console.Beep(800, 100);
             }
-            void Control()
+            
+
+            void Hello()
             {
-                while (true)
-                {
-                    var key = Console.ReadKey(true).Key;
-                     
-                    switch (key)
-                    {
-                        case ConsoleKey.A:
-                            /*graphics.playerAngle = 3.95f;
-                            graphics.playerPos.x = graphics.playerPos.x - speed;*/
-                            graphics.ro.y -= speed;
+                Console.WriteLine("Чтобы все работало правильно, необходимо провести настройку консоли.\nНажмите правой кнопкой мыши по загаловку консоли, далее свойства. ");
+                Console.WriteLine("В настройках расположение изменить размер окна. Ширина 331  высота 81!");
+                Console.WriteLine("В настройках терминала Цвет курсора, использовать цвет и все значения в 0");
+                Console.WriteLine("Обязательно поставьте 10 РАЗМЕР шрифта в консоли!! ");
 
-
-                            break;
-                        case ConsoleKey.W:
-                            /*graphics.playerAngle = 2.2f;
-                            graphics.playerPos.y = graphics.playerPos.y - speed;*/
-                            graphics.ro.x += speed;
-                            break;
-                        case ConsoleKey.D:
-                           /* graphics.playerAngle = 0.75f;
-                            graphics.playerPos.x = graphics.playerPos.x + speed;*/
-                            graphics.ro.y += speed;
-                            break;
-                        case ConsoleKey.S:
-                            /*graphics.playerAngle = 5.6f;
-                            graphics.playerPos.y = graphics.playerPos.y + speed;*/
-                            graphics.ro.x -= speed;
-                            break;
-                        case ConsoleKey.Spacebar:
-                            /*graphics.playerAngle = 5.6f;
-                            graphics.playerPos.y = graphics.playerPos.y + speed;*/
-                            graphics.ro.z -= speed;
-                            break;
-                        case ConsoleKey.C:
-                            /*graphics.playerAngle = 5.6f;
-                            graphics.playerPos.y = graphics.playerPos.y + speed;*/
-                            graphics.ro.z += speed;
-                            break;
-                    }
-                }
+                Console.WriteLine("!!!\nНажмите любые кнопки, чтобы начать\n WASD Space C - Управление");
+                Console.ReadKey();
             }
         }
     }

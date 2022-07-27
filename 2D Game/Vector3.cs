@@ -66,11 +66,28 @@ namespace _2D_Game
         {
             return (float)(a.x * b.x + a.y * b.y + a.z * b.z);
         }
+
+        
+
+        public static Vector3 Abs(Vector3 a)
+        {
+            return new Vector3(Math.Abs(a.x), Math.Abs(a.y), Math.Abs(a.z));
+        }
+
+        public static Vector3 Step(Vector3 edge,Vector3 a)
+        {
+            return new Vector3(function.Step(a.x,edge.x), function.Step(a.y,edge.y), function.Step(a.z,edge.z));
+        }
+
+        public static Vector3 Sign(Vector3 a)
+        {
+            return new Vector3(Math.Sign(a.x), Math.Sign(a.y), Math.Sign(a.z));
+        }
  
         public static float Length( Vector3 a)
         {
 
-            return (float)((Math.Pow(a.x, 2) + Math.Pow(a.y, 2) + Math.Pow(a.z, 2)));
+            return (float)Math.Pow(((a.x*a.x + a.y*a.y + a.z*a.z)),0.5f);
         }
         public static float GetAngle (Vector3 a, Vector3 b)
         {
