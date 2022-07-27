@@ -36,11 +36,18 @@ namespace _2D_Game
             return new Vector2 { x = a.x - b.x, y = a.y - b.y };
         }
 
+        public static Vector2 operator -(Vector2 a, float b)
+        {
+            return new Vector2 { x = a.x - b, y = a.y - b };
+        }
         public static Vector2 operator *(Vector2 a, Vector2 b)
         {
             return new Vector2 { x = a.x * b.x, y = a.y * b.y };
         }
-
+        public static Vector2 operator *(Vector2 a, float scalar)
+        {
+            return new Vector2 { x = a.x * scalar, y = a.y * scalar };
+        }
         public static Vector2 operator /(Vector2 a, Vector2 b)
         {
             return new Vector2 { x = a.x / b.x, y = a.y / b.y };

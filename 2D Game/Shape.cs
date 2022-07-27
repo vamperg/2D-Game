@@ -7,13 +7,13 @@ namespace _2D_Game
     public class Shape
     {
         protected Vector2 position;
-        protected char[] texture;
+        static protected char[] texture;
 
 
         public Shape(Vector2 position, char[] texture)
         {
             this.position = position;
-            this.texture = texture;
+            
         }
 
         public virtual char[] Draw(Graphics graphics)
@@ -43,9 +43,11 @@ namespace _2D_Game
     {
         protected float size;
 
-        public Circle(Vector2 position, float size, char[] texture) : base(position, texture)
+        public Circle(Vector2 position, float size) : base(position, texture)
         {
             this.size = size;
+            Circle circle = this;
+   
         }
 
         override public char[] Draw(Graphics graphics)
@@ -61,20 +63,16 @@ namespace _2D_Game
                     y += (float)Math.Sin(t * 0.001f) * 0.7f;*/
 
                     x *= graphics.aspect * graphics.pixelAspect;
-                    float f = (x - position.x) * (x - position.x) + (y - position.y) * (y - position.y);
+                    float offsetPosition = (x - position.x) * (x - position.x) + (y - position.y) * (y - position.y); //смещение центра координат для обьекта
 
                     char pixel;
-
-                    if (f < size)
+                     
+                    if (offsetPosition < size)//рисуем круг до границ круга
                     {
-                        if (f < size / 8)
-                            pixel = texture[3];
-                        else if (f < size / 3)
-                            pixel = texture[2];
-                        else if (f < size / 1.8f)
-                            pixel = texture[1];
-                        else
-                            pixel = texture[0];
+                        float dist = (float)Math.Sqrt(x * x + y * y);
+                        int color = (int)(1.0f / dist);
+                        color = function.Clamp(color, 0, graphics.gradientSize);
+                        pixel = graphics.gradient[color];
 
                         buffer[i + j * graphics.width] = pixel;
                     }
@@ -111,9 +109,9 @@ namespace _2D_Game
                      y += (float)Math.Sin(t * 0.001f) * 0.7f;*/
 
                     x *= graphics.aspect * graphics.pixelAspect;
-
+                    char pixel = graphics.gradient[4];
                     if (x > position.x && x < position.x + size.x && y > position.y && y < position.y + size.y)
-                        buffer[i + j * graphics.width] = texture[0];
+                        buffer[i + j * graphics.width] = pixel;
                 }
             return buffer;
         }

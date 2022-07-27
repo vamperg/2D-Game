@@ -2,8 +2,22 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>_2D_Game</RootNamespace>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Game2D_S</RootNamespace>
+    <StartupObject></StartupObject>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>0.01</Version>
+    <Authors>Vamperg</Authors>
+    <Company>Vamperg</Company>
+    <AssemblyName>Game2D</AssemblyName>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <ApplicationIcon>token_crypto_portfolio_icon_225985.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
   </PropertyGroup>
 
 </Project>
